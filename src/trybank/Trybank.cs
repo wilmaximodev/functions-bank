@@ -25,7 +25,9 @@ public class TrybankLib
     public void RegisterAccount(int number, int agency, int pass)
     {
         for (int i = 0; i < registeredAccounts; i++)
-        if (Bank[i, 0] == number) throw new ArgumentException("A conta já está sendo usada!");
+        {
+            if (Bank[i, 0] == number) throw new ArgumentException("A conta já está sendo usada!");
+        }
 
         Bank[registeredAccounts, 0] = number;
         Bank[registeredAccounts, 1] = agency;
@@ -40,13 +42,19 @@ public class TrybankLib
         if (Logged) throw new AccessViolationException("Usuário já está logado");
 
         for (int i = 0; i < registeredAccounts; i++)
-        if (Bank[i, 0] == number && Bank[i, 1] == agency)
-            if (Bank[i, 2] == pass)
-                Logged = true;
-                loggedUser = i;
-                return;
+        {
+            if (Bank[i, 0] == number && Bank[i, 1] == agency)
+            {
+                if (Bank[i, 2] == pass)
+                {
+                    Logged = true;
+                    loggedUser = i;
+                    return;
+                }
 
-            throw new ArgumentException("Senha incorreta");
+                throw new ArgumentException("Senha incorreta");
+            } 
+        }
 
         throw new ArgumentException("Agência + Conta não encontrada");
     }
