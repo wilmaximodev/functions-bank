@@ -25,9 +25,7 @@ public class TrybankLib
     public void RegisterAccount(int number, int agency, int pass)
     {
         for (int i = 0; i < registeredAccounts; i++)
-        {
-            if (Bank[i, 0] == number) throw new ArgumentException("A conta já está sendo usada!");
-        }
+        if (Bank[i, 0] == number) throw new ArgumentException("A conta já está sendo usada!");
 
         Bank[registeredAccounts, 0] = number;
         Bank[registeredAccounts, 1] = agency;
